@@ -13,12 +13,13 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 	//Go through x's
 	for (int xc = -r; xc <= r; xc++) {
 			for (int yc = -r; yc <= r; yc++) {
-				int r = (yc*yc) + (xc*xc);
-					if(noFill && r == rad2){
+				//radius squared = yc^2 + xc^2
+				int pyr = (yc*yc) + (xc*xc);
+					if(noFill && pyr == rad2){
 						LT24_drawPixel(colour,xc+x,yc+y);
 					}
-					else if(~noFill && r < rad2){
-						if(r == rad2){
+					else if(~noFill && pyr < rad2){
+						if(pyr == rad2){
 							LT24_drawPixel(colour,xc+x,yc+y);
 						}
 						else{
