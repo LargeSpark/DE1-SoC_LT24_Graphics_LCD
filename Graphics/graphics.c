@@ -138,24 +138,70 @@ void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned 
 }
 
 void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned int x3,unsigned int y3,unsigned short colour,bool noFill,unsigned short fillColour){
+
+	int Tind;
+	int Lind;
+	int Rind;
 	//Draw Outline
 	Graphics_drawLine(x1,y1,x2,y2,colour);
 	Graphics_drawLine(x2,y2,x3,y3,colour);
 	Graphics_drawLine(x3,y3,x1,y1,colour);
+	//calculate top
+	if(y1<y2 && y1<y3){
+		Tind = 1;
+	}
+	else if(y2<y1 && y2<y3){
+		Tind = 2;
+	}
+	else if(y3<y1 && y3<y2){
+		Tind = 3;
+	}
+
+	if(x1<x2 && x1<x3){
+		Lind = 1;
+	}
+	else if(x2<x1 && x2<x3){
+		Lind = 2;
+	}
+	else if(x3<x1 && x3<x2){
+		Lind = 3;
+	}
+
+	if(x1>x2 && x1>x3){
+		Rind = 1;
+	}
+	else if(x2>x1 && x2>x3){
+		Rind = 2;
+	}
+	else if(x3>x1 && x3>x2){
+		Rind = 3;
+	}
 
 	//If fill
 	if(~noFill){
 		//Minus 1 for each
-		x1--;
-		x2--;
-		x3--;
-		y1--;
-		y2--;
-		y3--;
-		//int colourFinished = 0;
-		//while(colourFinished == 0){
+		int colourFinished = 0;
+		while(colourFinished == 0){
+			int x;
+			if(Tind == 1){
+				if(Rind == 2){
+					for(x = 0;;x++){
+						Graphics_drawLine(x1+1,y1-1,x2-1,y2-1,colour);
+						Graphics_drawLine(x2,y2,x3,y3,colour);
+						Graphics_drawLine(x3,y3,x1,y1,colour);
+					}
+				}
+				if(Rind == 3){
 
-		//}
+				}
+			}
+			else if(ind == 2){
+
+			}
+			else if(ind == 3){
+
+			}
+		}
 	}
 }
 
