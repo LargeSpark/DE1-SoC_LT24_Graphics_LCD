@@ -102,25 +102,39 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 }
 
 void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned short colour){
-	int dx = x2 - x1;
-	int dy = y2 - y1;
-	/*int delta = 2*dy-dx;
-	int y = y1;
-	int x = x1;
-	while(x<x2){
-		if(delta>=0){
-			LT24_drawPixel(colour,x,y);
-			y++;
-		}
-		else{
-			LT24_drawPixel(colour,x,y);
-			delta+=2*dy;
-		}
-		x++;
+	//calculate deltas
+	int dx =  abs (x2 - x1);
+	int dy = -abs (y2 - y1);
+	//calculate error
+	int error = dx + dy, e2;
+	int sy;
+	int sx;
+	if(x1<x2){
+		sx = 1;
 	}
-*/
+	else{
+		sx = -1;
+	}
 
-
+	if(y1<y2){
+		sy = 1;
+	}
+	else{
+		sy = -1;
+	}
+	  while(1){
+		  LT24_drawPixel(colour,x1,y1);
+	    if (x1 == x2 && y1 == y2){ break;}
+	    e2 = 2 * error;
+	    if (e2 >= dy) {
+	    	error += dy;
+	    	x1 += sx;
+	    }
+	    if (e2 <= dx) {
+	    	error += dx;
+	    	y1 += sy;
+	    }
+	  }
 }
 
 void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned int x3,unsigned int y3,unsigned short colour,bool noFill,unsigned short fillColour){
