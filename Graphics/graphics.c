@@ -104,19 +104,21 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned short colour){
 	int dx = x2 - x1;
 	int dy = y2 - y1;
-	float d = abs(dy/dx);
-	float error = 0.0f;
-	int y = 0;
-	int x = 0;
-	for(x=x1; x<=x1; x++){
-		LT24_drawPixel(colour,x,y);
-		error = error + d;
-		if (error >=0.5){
-			y =+ dy;
-			error =-1.0;
+	/*int delta = 2*dy-dx;
+	int y = y1;
+	int x = x1;
+	while(x<x2){
+		if(delta>=0){
+			LT24_drawPixel(colour,x,y);
+			y++;
 		}
+		else{
+			LT24_drawPixel(colour,x,y);
+			delta+=2*dy;
+		}
+		x++;
 	}
-
+*/
 
 
 }
