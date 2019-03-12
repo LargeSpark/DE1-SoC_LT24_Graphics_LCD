@@ -8,6 +8,8 @@ RM := clean
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include HPS_usleep/subdir.mk
+-include HPS_I2C/subdir.mk
 -include Graphics/subdir.mk
 -include DE1SoC_LT24/subdir.mk
 -include subdir.mk

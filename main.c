@@ -8,6 +8,8 @@
  */
 
 #include "DE1SoC_LT24/DE1SoC_LT24.h"
+#include "HPS_I2C/HPS_I2C.h"
+#include "HPS_Watchdog/HPS_Watchdog.h"
 #include "Graphics/graphics.h"
 //Test code taken from assignment
 //Initialise the LCD Display.

@@ -34,5 +34,7 @@ CPP_DEPS :=
 SUBDIRS := \
 DE1SoC_LT24 \
 Graphics \
+HPS_I2C \
+HPS_usleep \
 . \
 
