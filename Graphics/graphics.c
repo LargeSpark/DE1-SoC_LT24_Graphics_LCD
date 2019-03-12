@@ -8,26 +8,33 @@ void Graphics_drawBox(unsigned int x1,unsigned int y1,unsigned int x2,unsigned i
 }
 
 void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned short colour,bool noFill,unsigned short fillColour){
-	//Radius Squared
-	int rad2 = r * r;
+	//Radius as signed int
+	int signedr = (int) r;
+	//Radius squared
+	int rad2 = signedr * signedr;
+	//Outline threshold
+	int outThres = 100;
 	//Go through x's
-	int xc; int yc;
-	for (xc = -r; xc <= r; xc++) {
-			for (yc = -r; yc <= r; yc++) {
-				//radius squared = yc^2 + xc^2
-				int pyr = (yc*yc) + (xc*xc);
-					if(noFill && pyr == rad2){
-						LT24_drawPixel(colour,xc+x,yc+y);
-					}
-					else if(~noFill && pyr < rad2){
-						if(pyr == rad2){
-							LT24_drawPixel(colour,xc+x,yc+y);
-						}
-						else{
-							LT24_drawPixel(fillColour,xc+x,yc+y);
-						}
-					}
+	int xc = 0;
+	int yc = 0;
+	//Loop through all X and Y of square the size of radius squared
+	for (xc = -signedr; xc <= signedr; xc++) {
+		for (yc = -signedr; yc <= signedr; yc++) {
+			//radius squared = yc^2 + xc^2
+			int pyr = (yc*yc) + (xc*xc);
+			//If no fill then draw outline
+			if(noFill && (pyr > rad2-outThres) && (pyr < rad2+outThres)){
+				LT24_drawPixel(colour,xc+x,yc+y);
 			}
+			else if(~noFill && pyr < rad2){
+				if((pyr > rad2-outThres) && (pyr < rad2+outThres)){
+					LT24_drawPixel(colour,xc+x,yc+y);
+				}
+				else{
+					LT24_drawPixel(fillColour,xc+x,yc+y);
+				}
+			}
+		}
 	}
 
 }
