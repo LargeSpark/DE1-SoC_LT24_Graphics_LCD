@@ -106,7 +106,8 @@ void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned 
 	int dx =  abs (x2 - x1);
 	int dy = -abs (y2 - y1);
 	//calculate error
-	int error = dx + dy, e2;
+	int error = dx + dy;
+	int error2;
 	int sy;
 	int sx;
 	if(x1<x2){
@@ -125,7 +126,7 @@ void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned 
 	  while(1){
 		  LT24_drawPixel(colour,x1,y1);
 	    if (x1 == x2 && y1 == y2){ break;}
-	    e2 = 2 * error;
+	    error2 = 2 * error;
 	    if (e2 >= dy) {
 	    	error += dy;
 	    	x1 += sx;
@@ -186,9 +187,9 @@ void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 			if(Tind == 1){
 				if(Rind == 2){
 					for(x = 0;;x++){
-						Graphics_drawLine(x1+1,y1-1,x2-1,y2-1,colour);
-						Graphics_drawLine(x2,y2,x3,y3,colour);
-						Graphics_drawLine(x3,y3,x1,y1,colour);
+						Graphics_drawLine(x1+x,y1-x,x2-x,y2-x,colour);
+						Graphics_drawLine(x2-x,y2+x,x3+x,y3+x,colour);
+						Graphics_drawLine(x3-x,y3+x,x1,y1,colour);
 					}
 				}
 				if(Rind == 3){
