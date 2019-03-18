@@ -4,12 +4,15 @@ void Graphics_initialise(unsigned volatile int lcd_pio_base,unsigned volatile in
 }
 
 void Graphics_drawBox(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned short colour,bool noFill,unsigned short fillColour){
+	//Signed Values declares
 	int sx1 = (int) x1;
 	int sx2 = (int) x2;
 	int sy1 = (int) y1;
 	int sy2 = (int) y2;
+	//calculate height and width
 	int height = abs(sy2-sy1);
 	int width = abs(sx1-sx2);
+	//set values for forloops
 	int y=0;
 	int x=0;
 	int oy=0;
@@ -142,6 +145,7 @@ void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 
 	//If fill
 	if(!noFill){
+		//Run fill traingle on 3 occassions to ensure on small triangles that no pixel is missed. Reset WD.
 		Graphics_fillTriangle(x1,y1,x2,y2,x3,y3,fillColour);ResetWDT();
 		Graphics_fillTriangle(x3,y3,x1,y1,x2,y2,fillColour);ResetWDT();
 		Graphics_fillTriangle(x2,y2,x3,y3,x1,y1,fillColour);ResetWDT();
