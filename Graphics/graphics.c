@@ -66,7 +66,7 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 	//Radius squared
 	int rad2 = signedr * signedr;
 	//Outline threshold
-	int outThres = 700;
+	int outThres = 230;
 	//Go through x's
 	int xc = 0;
 	int yc = 0;
@@ -76,11 +76,11 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 			//radius squared = yc^2 + xc^2
 			int pyr = (yc*yc) + (xc*xc);
 			//If no fill then draw outline
-			if(noFill && (pyr > rad2-outThres) && (pyr < rad2)){
+			if(noFill && (pyr > rad2-outThres) && (pyr <= rad2)){
 				LT24_drawPixel(colour,xc+x,yc+y);
 			}
 			//If fill draw fill
-			else if(!noFill && pyr < rad2){
+			else if(!noFill && pyr <= rad2){
 					LT24_drawPixel(fillColour,xc+x,yc+y);
 			}
 		}
@@ -92,7 +92,7 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 		for (xc = -signedr-3; xc <= signedr+3; xc++) {
 			for (yc = -signedr-3; yc <= signedr+3; yc++) {
 				int pyr = (yc*yc) + (xc*xc);
-				if((pyr > rad2-outThres) && (pyr < rad2)){
+				if((pyr > rad2-outThres) && (pyr <= rad2)){
 					LT24_drawPixel(colour,xc+x,yc+y);
 				}
 			}
@@ -141,7 +141,7 @@ void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned 
 void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned int x3,unsigned int y3,unsigned short colour,bool noFill,unsigned short fillColour){
 
 	//If fill
-	if(~noFill){
+	if(!noFill){
 		Graphics_fillTriangle(x1,y1,x2,y2,x3,y3,fillColour);ResetWDT();
 		Graphics_fillTriangle(x3,y3,x1,y1,x2,y2,fillColour);ResetWDT();
 		Graphics_fillTriangle(x2,y2,x3,y3,x1,y1,fillColour);ResetWDT();
