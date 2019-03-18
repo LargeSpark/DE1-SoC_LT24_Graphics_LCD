@@ -2,6 +2,7 @@
 #define GRAPHICS_H
 
 #include "../DE1SoC_LT24/DE1SoC_LT24.h"
+#include "../HPS_Watchdog/HPS_Watchdog.h"
 
  void Graphics_initialise(unsigned volatile int lcd_pio_base,unsigned volatile int lcd_hw_base);
 

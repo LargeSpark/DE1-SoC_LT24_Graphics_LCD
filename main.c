@@ -5,13 +5,15 @@
 #include "Graphics/graphics.h"
 //Test code taken from assignment
 //Initialise the LCD Display.
+//Initialise the LCD Display.
+//Initialise the LCD Display.
 int main(void) {
  //Initialise the LCD Display.
  Graphics_initialise(0xFF200060,0xFF200080); ResetWDT();
  //Rectangle. Red Border. Grey Fill.
  Graphics_drawBox(10,10,230,310,LT24_RED,false,0x39E7); ResetWDT();
  //Circle. Blue Border, White Fill. Centre of screen. 100px radius
- Graphics_drawCircle(120,160,100,LT24_BLUE,false,LT24_MAGENTA); ResetWDT();
+ Graphics_drawCircle(120,160,100,LT24_BLUE,false,LT24_WHITE); ResetWDT();
  //Circle. Yellow Border, No Fill. Centre of screen. 102px radius
  Graphics_drawCircle(120,160,102,LT24_YELLOW,true,0); ResetWDT();
  //Rectangle. Cyan Border, No Fill.

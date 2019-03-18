@@ -33,7 +33,7 @@ void Graphics_drawBox(unsigned int x1,unsigned int y1,unsigned int x2,unsigned i
 	}
 
 	//cube fill (draws first so it can be overdrawn with outline)
-	if(~noFill){
+	if(!noFill){
 		for(y=0; y <= height; y++){
 			for(x=0; x<=width; x++){
 				LT24_drawPixel(fillColour,x+llx,y+lly);
@@ -142,9 +142,9 @@ void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 
 	//If fill
 	if(~noFill){
-		Graphics_fillTriangle(x1,y1,x2,y2,x3,y3,fillColour);
-		Graphics_fillTriangle(x3,y3,x1,y1,x2,y2,fillColour);
-		Graphics_fillTriangle(x2,y2,x3,y3,x1,y1,fillColour);
+		Graphics_fillTriangle(x1,y1,x2,y2,x3,y3,fillColour);ResetWDT();
+		Graphics_fillTriangle(x3,y3,x1,y1,x2,y2,fillColour);ResetWDT();
+		Graphics_fillTriangle(x2,y2,x3,y3,x1,y1,fillColour);ResetWDT();
 	}
 	//Draw Outline
 	Graphics_drawLine(x1,y1,x2,y2,colour);
