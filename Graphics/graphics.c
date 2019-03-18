@@ -143,6 +143,8 @@ void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 	//If fill
 	if(~noFill){
 		Graphics_fillTriangle(x1,y1,x2,y2,x3,y3,fillColour);
+		Graphics_fillTriangle(x3,y3,x1,y1,x2,y2,fillColour);
+		Graphics_fillTriangle(x2,y2,x3,y3,x1,y1,fillColour);
 	}
 	//Draw Outline
 	Graphics_drawLine(x1,y1,x2,y2,colour);
