@@ -8,6 +8,8 @@ RM := clean
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include sevenSeg/subdir.mk
+-include Timer/subdir.mk
 -include HPS_usleep/subdir.mk
 -include HPS_I2C/subdir.mk
 -include Graphics/subdir.mk
@@ -62,10 +64,10 @@ endif
 all: Graphics_LCD.axf
 
 # Tool invocations
-Graphics_LCD.axf: $(OBJS) M:/MASTERS/Microcontroller_and_processors/Eclipse_WS/Graphics_LCD/FPGARomRam.scat $(USER_OBJS) $(LIBS)
+Graphics_LCD.axf: $(OBJS) E:/EMBEDDED_WS/Eclipse_WS/Graphics_LCD/FPGARomRam.scat $(USER_OBJS) $(LIBS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker 5'
-	armlink --cpu=Cortex-A9.no_neon.no_vfp --entry=__main --scatter="M:/MASTERS/Microcontroller_and_processors/Eclipse_WS/Graphics_LCD/FPGARomRam.scat" --info=sizes -o "Graphics_LCD.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	armlink --cpu=Cortex-A9.no_neon.no_vfp --entry=__main --scatter="E:/EMBEDDED_WS/Eclipse_WS/Graphics_LCD/FPGARomRam.scat" --info=sizes -o "Graphics_LCD.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -39,7 +39,7 @@ void Graphics_drawBox(unsigned int x1,unsigned int y1,unsigned int x2,unsigned i
 	if(!noFill){
 		for(y=0; y <= height; y++){
 			for(x=0; x<=width; x++){
-				LT24_drawPixel(fillColour,x+llx,y+lly);
+				Graphics_drawPixel(fillColour,x+llx,y+lly);
 			}
 		}
 	}
@@ -47,17 +47,17 @@ void Graphics_drawBox(unsigned int x1,unsigned int y1,unsigned int x2,unsigned i
 	//cube outline
 	//verticle outline
 	for(oy = 0; oy <=height; oy++){
-		LT24_drawPixel(colour,sx1,lly+oy);
+		Graphics_drawPixel(colour,sx1,lly+oy);
 	}
 	for(oy = 0; oy <=height; oy++){
-		LT24_drawPixel(colour,sx2,lly+oy);
+		Graphics_drawPixel(colour,sx2,lly+oy);
 	}
 	//horizontal outline
 	for(ox = 0; ox <=width; ox++){
-		LT24_drawPixel(colour,llx+ox,sy1);
+		Graphics_drawPixel(colour,llx+ox,sy1);
 	}
 	for(ox = 0; ox <=width; ox++){
-		LT24_drawPixel(colour,llx+ox,sy2);
+		Graphics_drawPixel(colour,llx+ox,sy2);
 	}
 
 
@@ -80,11 +80,11 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 			int pyr = (yc*yc) + (xc*xc);
 			//If no fill then draw outline
 			if(noFill && (pyr > rad2-outThres) && (pyr <= rad2)){
-				LT24_drawPixel(colour,xc+x,yc+y);
+				Graphics_drawPixel(colour,xc+x,yc+y);
 			}
 			//If fill draw fill
 			else if(!noFill && pyr <= rad2){
-					LT24_drawPixel(fillColour,xc+x,yc+y);
+				Graphics_drawPixel(fillColour,xc+x,yc+y);
 			}
 		}
 	}
@@ -94,6 +94,7 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 		yc = 0;
 		for (xc = -signedr-3; xc <= signedr+3; xc++) {
 			for (yc = -signedr-3; yc <= signedr+3; yc++) {
+				//get r and check if it the same as radius
 				int pyr = (yc*yc) + (xc*xc);
 				if((pyr > rad2-outThres) && (pyr <= rad2)){
 					LT24_drawPixel(colour,xc+x,yc+y);
@@ -105,12 +106,15 @@ void Graphics_drawCircle(unsigned int x,unsigned int y,unsigned int r,unsigned s
 }
 
 void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned short colour){
+	//REFERENCE: drawLine using Bresenhams algorithm. https://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm
+
 	//calculate deltas
 	int dx =  abs (x2 - x1);
 	int dy = -abs (y2 - y1);
 	//calculate error
 	int error = dx + dy;
 	int error2;
+	//Find quadrant
 	int sy;
 	int sx;
 	if(x1<x2){
@@ -126,19 +130,22 @@ void Graphics_drawLine(unsigned int x1,unsigned int y1,unsigned int x2,unsigned 
 	else{
 		sy = -1;
 	}
-	  while(1){
-		  LT24_drawPixel(colour,x1,y1);
-	    if (x1 == x2 && y1 == y2){ break;}
-	    error2 = 2 * error;
-	    if (error2 >= dy) {
-	    	error += dy;
-	    	x1 += sx;
-	    }
-	    if (error2 <= dx) {
-	    	error += dx;
-	    	y1 += sy;
-	    }
-	  }
+	//Loop though and calculate line pixels
+	while(1){
+		Graphics_drawPixel(colour,x1,y1);
+		if (x1 == x2 && y1 == y2){ break;}
+		error2 = 2 * error;
+		//if error2 is larger than delta y then add 1 to x
+		if (error2 >= dy) {
+			error += dy;
+			x1 += sx;
+		}
+		//if error2 is smaller than delta x then add 1 to y
+		if (error2 <= dx) {
+			error += dx;
+			y1 += sy;
+		}
+  }
 }
 
 void Graphics_drawTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2,unsigned int x3,unsigned int y3,unsigned short colour,bool noFill,unsigned short fillColour){
@@ -179,7 +186,7 @@ void Graphics_fillTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 		else{
 			sy = -1;
 		}
-		  while(1){
+		while(1){
 			Graphics_drawLine(x3,y3,x1,y1,fillColour); //drawLine
 		    if (x1 == x2 && y1 == y2){ break;}
 		    error2 = 2 * error;
@@ -191,6 +198,15 @@ void Graphics_fillTriangle(unsigned int x1,unsigned int y1,unsigned int x2,unsig
 		    	error += dx;
 		    	y1 += sy;
 		    }
-		  }
+		}
 }
 
+void Graphics_drawPixel(unsigned short Colour, unsigned int x, unsigned int y){
+	int status = LT24_drawPixel(Colour,x,y);
+	ResetWDT();
+	if(status != 0){
+		SDisplay_clearAll();
+		SDisplay_set(0, 0x1);
+		SDisplay_set(1, 0xE);
+	}
+}

@@ -3,14 +3,18 @@
 #include "HPS_I2C/HPS_I2C.h"
 #include "HPS_Watchdog/HPS_Watchdog.h"
 #include "Graphics/graphics.h"
+#include "sevenSeg/sevenSeg.h"
+#include "Timer/Timer.h"
 //Test code taken from assignment
 //Initialise the LCD Display.
 //Initialise the LCD Display.
 //Initialise the LCD Display.
 int main(void) {
+	int FPS;
  //Initialise the LCD Display.
  Graphics_initialise(0xFF200060,0xFF200080); ResetWDT();
  //Rectangle. Red Border. Grey Fill.
+ timer_Start();
  Graphics_drawBox(10,10,230,310,LT24_RED,false,0x39E7); ResetWDT();
  //Circle. Blue Border, White Fill. Centre of screen. 100px radius
  Graphics_drawCircle(120,160,100,LT24_BLUE,false,LT24_WHITE); ResetWDT();
@@ -27,5 +31,7 @@ int main(void) {
  //Triangle. Yellow Border, Green Fill. Bottom left corner Equilateral triangle.
  Graphics_drawTriangle(213,283,204,302,222,302,LT24_YELLOW,false,LT24_GREEN);
  //Done.
+ FPS = timer_Stop();
+ SDisplay_PNum(FPS,0);
  while (1) { HPS_ResetWatchdog(); } //Watchdog reset.
 }
