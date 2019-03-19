@@ -8,7 +8,41 @@
 \usepackage{titling}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\newcommand{\GraphicsC}{../Graphics/Graphics.c}
+\newcommand{\GraphicsH}{../Graphics/Graphics.h}
+\newcommand{\TimerC}{../Timer/Timer.c}
+\newcommand{\TimerH}{../Timer/Timer.h}
+\newcommand{\sevenSegC}{../sevenSeg/sevenSeg.c}
+\newcommand{\sevenSegH}{../sevenSeg/sevenSeg.h}
+
+\lstset{style=mystyle}
 
 \pretitle{%
   \begin{center}
@@ -32,6 +66,7 @@
 \date{March 2019}
 \maketitle
 \section{Abstract}
+In this assignment the task was to create a graphics library for the DE1-SoC using an LT24 LCD screen. 
 \newpage
 
 \tableofcontents
@@ -48,31 +83,45 @@
 \newpage
 \section{Appendix}
 \subsection{Graphics.c/.h}
+
 \subsubsection{Graphics Header}
+\lstinputlisting[language=C++]{\GraphicsH}
 \subsubsection{Graphics initialise}
-
+\lstinputlisting[language=C++, firstline=2, lastline=4]{\GraphicsC}
+\newpage
 \subsubsection{Graphics drawBox}
-
+\lstinputlisting[language=C++, firstline=6, lastline=64]{\GraphicsC}
 \subsubsection{Graphics drawCircle}
-
+\lstinputlisting[language=C++, firstline=66, lastline=106]{\GraphicsC}
 \subsubsection{Graphics drawLine}
-
+\newpage
+\lstinputlisting[language=C++, firstline=108, lastline=149]{\GraphicsC}
+\newpage
 \subsubsection{Graphics drawTriangle}
-
+\lstinputlisting[language=C++, firstline=151, lastline=164]{\GraphicsC}
+\newpage
 \subsubsection{Graphics fillTriangle}
-
+\lstinputlisting[language=C++, firstline=166, lastline=202]{\GraphicsC}
 \subsubsection{Graphics drawPixel}
+\lstinputlisting[language=C++, firstline=204, lastline=212]{\GraphicsC}
 
+\newpage
 \subsection{Timer.c/.h}
 \subsubsection{Timer Header}
+\lstinputlisting[language=C++]{\TimerH}
 \subsubsection{Timer start}
+\lstinputlisting[language=C++, firstline=14, lastline=26]{\TimerC}
 \subsubsection{Timer stop}
+\lstinputlisting[language=C++, firstline=28, lastline=41]{\TimerC}
 
+\newpage
 \subsection{sevenSeg.c/.h}
 \subsubsection{SDisplay Header}
+\lstinputlisting[language=C++]{\sevenSegH}
 \subsubsection{SDisplay clearAll}
+\lstinputlisting[language=C++, firstline=24, lastline=32]{\sevenSegC}
 \subsubsection{SDisplay set}
-
+\lstinputlisting[language=C++, firstline=5, lastline=22]{\sevenSegC}
 \newpage
 \section{Bibliography}
 
