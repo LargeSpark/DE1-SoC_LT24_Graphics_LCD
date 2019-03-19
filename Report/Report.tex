@@ -70,7 +70,7 @@
 \date{March 2019}
 \maketitle
 \section{Abstract}
-In this assignment the task was to create a graphics driver for the DE1-SoC using an LT24 LCD screen.[1] In this report the code design solutions and testing will be discussed in depth.  
+In this assignment the task was to create a graphics driver for the DE1-SoC using an LT24 LCD screen.[1] In this report the code and testing to create various shapes and lines will be discussed and design choices explained.
 \newpage
 
 \tableofcontents
@@ -87,7 +87,7 @@ In this assignment the task was to create a graphics driver for the DE1-SoC usin
 In this assignment there was 3 different prerequisite's, firstly build a simple driver with a source file and a header file, secondly it must be able to draw lines, circles, rectangles, and triangles, finally the shapes must also allow the option to be filled and unfilled. [1] A piece of test code was provided to which produces a test image. This can be seen in appendix 6.1. 
 \newline
 \newline
-The graphics driver utilised the LT24 display driver. It used the function LT24 drawPixel and initialisation. The graphics driver comprises of algorithms to create the shapes utilising loops. Every pixel drawn is checked to see if is still in the window of the LCD screen. A window is a defined area which is within the LCD screen. A wrapper was also created to control the 7 segment display to allow the FPS speed to be outputted onto the board.
+The graphics driver utilised the LT24 display driver. It used the function of LT24 drawPixel and initialisation. The graphics driver comprises of algorithms to create the shapes utilising loops. Every pixel drawn is checked to see if it is still in the window of the LCD screen. A window is a defined area which is within the LCD screen. A wrapper was also created to control the 7 segment display to allow the FPS speed to be outputted onto the board.
 \end{flushleft}
 
 \begin{figure}[h]
@@ -109,7 +109,7 @@ This function was created to check each pixel is within the LCD window. If a pix
 \end{flushleft}
 \subsection{Draw Box}
 \begin{flushleft}
-The draw box function uses a number of steps to create a box (code in Appendix 6.2.3). Firstly it finds the lowest bottom left corner value of the box by finding the smallest x and smallest y value. It then uses a calculated value for height and width and creates the box using 2 for loops which renders the box one pixel at a time in a typewriter style. Finally the outline is added to the box.
+The draw box function uses a number of steps to create a box (code in Appendix 6.2.3). Firstly it finds the lowest bottom left corner value of the box by finding the smallest x and smallest y value. It then uses a calculated value for height and width and creates the box using 2 for loops which renders the box one pixel at a time in a typewriter style. Finally, the outline is added to the box.
 \end{flushleft}
 \subsection{Draw Circle}
 \begin{flushleft}
@@ -131,7 +131,7 @@ To draw the circle an algorithm was designed utilising Pythagoras theorem (code 
 
 \subsection{Draw Line}
 \begin{flushleft}
-To draw the line (code in appendix 6.2.5) is was more difficult than expected. An algorithm called Bresenham's line algorithm. The code was based off an examples found on rosetta code. [3]  The algorithm essentially draws a line across the pixels. If error 2 is larger than dy then x1 is equal to x1 plus a value dependent on the quadrant which the line's angle lies in. If error 2 is smaller than dx then error is increased by dx and y1 is equal to y1 plus a value dependent on the quadrant. This can be better shown in figure 6 where sx and sy are set dependent on the quadrant. This turns on the appropriate pixels of where the line lands.
+To draw the line (code in appendix 6.2.5) it was more difficult than expected. An algorithm called Bresenham's line algorithm. The code was based off an example found on Rosetta code. [3]  The algorithm essentially draws a line across the pixels. If error 2 is larger than dy then x1 is equal to x1 plus a value dependent on the quadrant which the line's angle lies in. If error 2 is smaller than dx then error is increased by dx and y1 is equal to y1 plus a value dependent on the quadrant. This can be better shown in figure 6 where sx and sy are set depending on the quadrant. This turns on the appropriate pixels of where the line lands.
 \end{flushleft}
 \begin{figure}[h]
 	\centering
@@ -163,10 +163,10 @@ This modified version of the line function created worked by creating numerous s
 \end{flushleft}
 \section{Testing and Debugging}
 \begin{flushleft}
-Various testing techniques were used to test both software and hardware using the graphics driver
+Various testing techniques were used to test both software and hardware using the graphics driver.
 \end{flushleft}
 \subsection{Software}
-In software testing and debugging the Eclipse IDE was used to step through code and test variables to see if they are to be as what is expected. A number of bugs where solved by doing this, an example was such as when a boolean NOT symbol was used instead of the logical NOT symbol (!) which stopped fills working correctly for the shapes as this made the if statements act erratically. \newline \newline Another example of using this method was testing the timer where it was possible to grab the variables to find how long it took the DE1-SoC to run the test code. A break point would be placed on line 6 of Figure 9 allowing the variables to be seen in the variable explorer in the debugger. Using this for the timer the hardware optimisation code was tested which was enabled from the LT24 driver. It was found that when the hardware optimisation was enabled that the frame rate decreased from 6 FPS to 3 FPS.
+In software testing and debugging the Eclipse IDE was used to step through code and test variables to see if they are to be as what is expected. A number of bugs were solved by doing this, an example was such as when a boolean NOT symbol was used instead of the logical NOT symbol (!) which stopped fills working correctly for the shapes as this made the if statements act erratically. \newline \newline Another example of using this method was testing the timer where it was possible to grab the variables to find how long it took the DE1-SoC to run the test code. A breakpoint would be placed on line 6 of Figure 9 allowing the variables to be seen in the variable explorer in the debugger. Using this for the timer the hardware optimisation code was tested which was enabled from the LT24 driver. It was found that when the hardware optimisation was enabled that the frame rate decreased from 6 FPS to 3 FPS.
 \begin{figure}[h]
 	\centering
 	\setlength{\belowcaptionskip}{-15pt}
@@ -226,7 +226,7 @@ In conclusion, creating the Graphics driver was an intellectually stimulating ta
 \newpage
 
 \section{Bibliography}
-[1] D. Cowell, S. Freear and T. Carpenter, "ELEC5620M: Embedded Microprocessor System Design - Assignement 1", 2019.. \newline
-[2] Veritas Prep, Pythagoras Theorem to create circle. 2016 [Online]. Available: \newline https://www.veritasprep.com/blog/wp-content/uploads/2016/10/DG-Blog-4.png. [Accessed: 19- Mar- 2019]. \newline
-[3]"Bitmap/Bresenham's line algorithm - Rosetta Code", Rosettacode.org. [Online]. Available: https://rosettacode.org/wiki/Bitmap/Bresenham\%27s\_line\_algorithm. [Accessed: 19- Mar- 2019] \newline
+[1] D. Cowell, S. Freear and T. Carpenter, "ELEC5620M: Embedded Microprocessor System Design - Assignment 1", 2019. \newline
+[2] Veritas Prep, Pythagoras Theorem to create circle. 2016 [Online]. Available: \newline https://www.veritasprep.com/blog/wp-content/uploads/2016/10/DG-Blog-4.png. [Accessed: 19-Mar-2019]. \newline
+[3]"Bitmap/Bresenham's line algorithm - Rosetta Code", Rosettacode.org. [Online]. Available: https://rosettacode.org/wiki/Bitmap/Bresenham\%27s\_line\_algorithm. [Accessed: 19-Mar-2019] \newline
 \end{document}
