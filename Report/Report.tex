@@ -64,7 +64,8 @@
 \posttitle{\end{center}}
 
 \begin{document}
-\title{ELEC5620M \\ Embedded Microprocessor System Design \\ Assignment 1}
+
+\title{\\ ELEC5620M \\ Embedded Microprocessor System Design \\ Assignment 1}
 \author{Alexander Bolton \\ 200938078}
 \date{March 2019}
 \maketitle
@@ -141,7 +142,7 @@ To draw the line (code in appendix 6.2.5) is was more difficult than expected. A
 \subsection{Draw Triangle}
 \begin{flushleft}
 To draw a triangle two functions where created. One function created the outline using the line function and another function was created which was a modification of the line function to fill the triangle. \newline \newline
-This modified version 
+This modified version of the line function created worked by creating numerous straight lines from with one point set to x3,y3, and another set which moves between x1,y1 and x1,y2. This code was run 3 times to ensure it is filled as in smaller triangles the lines are more distorted. This modification was a single line of code on line 2 of Figure 8.
 \end{flushleft}
 \begin{figure}[h]
 	\centering
@@ -149,11 +150,36 @@ This modified version
 	\lstinputlisting[language=C++, firstline=151, lastline=164]{\GraphicsC}
 	\caption{The main triangle function}
 \end{figure}
+\begin{figure}[h]
+	\centering
+	\setlength{\belowcaptionskip}{-15pt}
+	\lstinputlisting[language=C++, firstline=189, lastline=201]{\GraphicsC}
+	\caption{The fill triangle function sample showing the single line modification}
+\end{figure}
+\begin{flushleft}
+.
+\newline
+\newline
+\end{flushleft}
+\section{Testing and Debugging}
+\begin{flushleft}
+Various testing techniques were used to test both software and hardware using the graphics driver
+\end{flushleft}
+\subsection{Software}
+In software testing and debugging the Eclipse IDE was used to step through code and test variables to see if they are to be as what is expected. A number of bugs where solved by doing this, an example was such as when a boolean NOT symbol was used instead of the logical NOT symbol (!) which stopped fills working correctly for the shapes as this made the if statements act erratically. \newline \newline Another example of using this method was testing the timer where it was possible to grab the variables to find how long it took the DE1-SoC to run the test code. A break point would be placed on line 6 of Figure 9 allowing the variables to be seen in the variable explorer in the debugger. Using this for the timer the hardware optimisation code was tested which was enabled from the LT24 driver. It was found that when the hardware optimisation was enabled that the frame rate decreased from 6 FPS to 3 FPS.
+\begin{figure}[h]
+	\centering
+	\setlength{\belowcaptionskip}{-15pt}
+	\lstinputlisting[language=C++, firstline=32, lastline=37]{\TimerC}
+	\caption{The timer stop function snippet}
+\end{figure}
 
-\section{Testing}
-\subsection{optimisation}
+\subsection{Hardware}
+When testing on hardware the example code would be run and checked to see if it was as displayed as expected. The frame rate was outputted from the timer to the 7 segment display using a library which was created. (Appendix 6.4) The error function was also tested by trying to draw a pixel which was not on the physical screen which displayed error E1 on the 7 segment display.
 \section{Conclusion}
-
+\begin{flushleft}
+In conclusion, creating the Graphics driver was an intellectually stimulating task in which numerous algorithms and testing techniques had to be used. The most difficult challenges were the create a line algorithm and triangle fill algorithm. The Eclipse IDE was found to be a very powerful tool for testing and debugging as it allows us to step through code whilst checking registers and memory variables. The final graphics driver was a success however did not run as fast as wanted. More optimisation would've been possible with more time which could have increased the frames per second. 
+\end{flushleft}
 \newpage
 \section{Appendix}
 \subsection{Test code}
