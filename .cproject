@@ -45,6 +45,9 @@
 							<tool id="com.arm.tool.librarian.1954128846" name="ARM Librarian 5" superClass="com.arm.tool.librarian"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="Report/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
